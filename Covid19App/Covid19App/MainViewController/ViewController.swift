@@ -17,15 +17,25 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var newCases: CountingLabel!
-    @IBOutlet weak var totalDeaths: CountingLabel!
-    @IBOutlet weak var newDeaths: CountingLabel!
-    
+    @IBOutlet weak var newCases: CountingLabel! {
+        didSet {
+            newCases.text = String(newcases)
+        }
+    }
+    @IBOutlet weak var totalDeaths: CountingLabel! {
+        didSet {
+            totalDeaths.text = String(totaldeaths)
+        }
+    }
+    @IBOutlet weak var newDeaths: CountingLabel! {
+        didSet {
+            newDeaths.text = String(newdeaths)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getDataFromServer(completion: animate)
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
