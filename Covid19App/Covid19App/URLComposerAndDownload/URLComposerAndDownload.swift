@@ -54,20 +54,7 @@ func getDataFromServer(completion: @escaping ()->Void) {
         data, response, error in
         
         parse(data!)
-        
-        total = (results?.global.totalConfirmed)!
-        newcases = (results?.global.newConfirmed)!
-        totaldeaths = (results?.global.totalDeaths)!
-        newdeaths = (results?.global.newDeaths)!
-        old = (results?.global.totalConfirmed)! - (results?.global.newConfirmed)!
-        oldDeaths = (results?.global.totalDeaths)! - (results?.global.newDeaths)!
-        
-        countrytotal = currentCountry[0].totalConfirmed
-        countrynewcases = currentCountry[0].newConfirmed
-        countryold = currentCountry[0].totalConfirmed - currentCountry[0].newConfirmed
-        countrytotaldeaths = currentCountry[0].totalDeaths
-        countryoldDeaths = currentCountry[0].totalDeaths - currentCountry[0].newDeaths
-        countrynewdeaths = currentCountry[0].newDeaths
+        updateUI()
         
         DispatchQueue.main.sync {
             completion()
@@ -75,6 +62,23 @@ func getDataFromServer(completion: @escaping ()->Void) {
     }
     
     dataTask.resume()
+    
+}
+
+func updateUI() {
+    total = (results?.global.totalConfirmed)!
+    newcases = (results?.global.newConfirmed)!
+    totaldeaths = (results?.global.totalDeaths)!
+    newdeaths = (results?.global.newDeaths)!
+    old = (results?.global.totalConfirmed)! - (results?.global.newConfirmed)!
+    oldDeaths = (results?.global.totalDeaths)! - (results?.global.newDeaths)!
+    
+    countrytotal = currentCountry[0].totalConfirmed
+    countrynewcases = currentCountry[0].newConfirmed
+    countryold = currentCountry[0].totalConfirmed - currentCountry[0].newConfirmed
+    countrytotaldeaths = currentCountry[0].totalDeaths
+    countryoldDeaths = currentCountry[0].totalDeaths - currentCountry[0].newDeaths
+    countrynewdeaths = currentCountry[0].newDeaths
     
 }
 

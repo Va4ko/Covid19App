@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Your Country-->
         <scene sceneID="raV-XL-ob9">
             <objects>
                 <viewController id="TVt-uU-lPO" customClass="SecondViewController" customModule="Covid19App" customModuleProvider="target" sceneMemberID="viewController">
@@ -101,7 +101,7 @@
                             <constraint firstItem="esO-7P-8M9" firstAttribute="leading" secondItem="6xg-uy-pMc" secondAttribute="leading" id="sxP-K7-xSL"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="location.circle.fill" catalog="system" id="hkq-td-B0y"/>
+                    <tabBarItem key="tabBarItem" title="Your Country" image="location.circle.fill" catalog="system" id="hkq-td-B0y"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="countryLabel" destination="m1H-OO-ade" id="qGm-ad-cgd"/>
@@ -118,7 +118,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="FTa-Bd-gBf">
             <objects>
-                <tabBarController id="BEP-uw-02D" sceneMemberID="viewController">
+                <tabBarController id="BEP-uw-02D" customClass="TabBarController" customModule="Covid19App" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="N7o-Rw-0i7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -133,7 +133,7 @@
             </objects>
             <point key="canvasLocation" x="-1602" y="65"/>
         </scene>
-        <!--Item-->
+        <!--Global-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Covid19App" customModuleProvider="target" sceneMemberID="viewController">
@@ -213,7 +213,7 @@
                             <constraint firstItem="Qfz-Sq-76W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="y35-nq-qLo"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="globe" catalog="system" id="vvi-kO-Mi5"/>
+                    <tabBarItem key="tabBarItem" title="Global" image="globe" catalog="system" id="vvi-kO-Mi5"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="newCases" destination="M24-6g-sLc" id="jBb-6B-Y30"/>
