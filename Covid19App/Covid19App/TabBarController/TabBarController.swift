@@ -13,7 +13,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         delegate = self
-
+        
     }
     
 }
@@ -24,14 +24,14 @@ extension TabBarController: UITabBarControllerDelegate {
             return false
         }
         let viewControllers = tabBarController.viewControllers! as [UIViewController]
-        let selectedIndex = tabBarController.selectedIndex
         
-        if selectedIndex < viewControllers.count - 1 {
-            UIView.transition(from: fromView, to: toView, duration: 0.3, options: [.transitionFlipFromRight], completion: nil)
-            tabBarController.selectedIndex += 1
-        } else if selectedIndex == viewControllers.count - 1 {
+        let fromViewIndex = viewControllers.firstIndex(of: selectedViewController!)
+        let toViewIndex = viewControllers.firstIndex(of: viewController)
+        
+        if toViewIndex! < fromViewIndex! {
             UIView.transition(from: fromView, to: toView, duration: 0.3, options: [.transitionFlipFromLeft], completion: nil)
-            tabBarController.selectedIndex -= 1
+        } else if toViewIndex! > fromViewIndex! {
+            UIView.transition(from: fromView, to: toView, duration: 0.3, options: [.transitionFlipFromRight], completion: nil)
         }
         
         return true

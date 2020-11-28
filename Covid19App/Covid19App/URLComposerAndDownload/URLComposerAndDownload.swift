@@ -9,6 +9,8 @@ import Foundation
 
 var results: Results?
 var currentCountry = [Country]()
+var selectedCountry = [Country]()
+var countryNames = [String]()
 
 var old = 0
 var oldDeaths = 0
@@ -87,8 +89,24 @@ func parse(_ data: Data) {
         let decoder = JSONDecoder()
         results = try decoder.decode(Results.self, from: data)
         let countryResults = results!.countries
+        
+        for country in countryResults {
+            countryNames.append(country.country)
+        }
+        
         currentCountry = countryResults.filter { $0.countryCode == "\(getCountryCode())" }
     } catch {
         print(error)
     }
+}
+
+func getcountryData(countryName: String, completion: @escaping ()->Void) -> [Country] {
+    let countryResults = results!.countries
+    let country = countryResults.filter { $0.country == "\(countryName)" }
+    
+    DispatchQueue.main.async {
+        completion()
+    }
+    
+    return country
 }

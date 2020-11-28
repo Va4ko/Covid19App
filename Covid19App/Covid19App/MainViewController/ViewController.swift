@@ -48,11 +48,11 @@ class ViewController: UIViewController {
         
     }
     
-    func animate() {
-        totalCounts.count(fromValue: Float(old), to: Float(total), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
-        newCases.count(fromValue: 0, to: Float(newcases), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
-        totalDeaths.count(fromValue: Float(oldDeaths), to: Float(totaldeaths), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
-        newDeaths.count(fromValue: 0, to: Float(newdeaths), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
+    func animate() {        
+        totalCounts.count(fromValue: Float(old), to: Float(total), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
+        newCases.count(fromValue: 0, to: Float(newcases), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
+        totalDeaths.count(fromValue: Float(oldDeaths), to: Float(totaldeaths), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
+        newDeaths.count(fromValue: 0, to: Float(newdeaths), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
     }
     
     @objc fileprivate func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {

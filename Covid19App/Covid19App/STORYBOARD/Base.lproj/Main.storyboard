@@ -113,7 +113,119 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3KK-6A-XAl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="368.36581709145429"/>
+            <point key="canvasLocation" x="-658" y="64"/>
+        </scene>
+        <!--Select-->
+        <scene sceneID="8kv-MA-xF5">
+            <objects>
+                <viewController id="WqR-rO-IMQ" customClass="SelectCountryViewController" customModule="Covid19App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UJm-2J-DdQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHx-Bg-zAd">
+                                <rect key="frame" x="0.0" y="60" width="375" height="250"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="c0h-dT-eus"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="WqR-rO-IMQ" id="KiX-DP-2st"/>
+                                    <outlet property="delegate" destination="WqR-rO-IMQ" id="Fbo-MU-4sB"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VU3-IB-rhi">
+                                <rect key="frame" x="105" y="10" width="165" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6XC-os-fcw"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="tQJ-TG-eAC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="8Qe-Uj-B7S">
+                                <rect key="frame" x="10" y="330" width="355" height="268"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Cases:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHb-7U-adp">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ql5-Qm-1vv" customClass="CountingLabel" customModule="Covid19App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="21.5" width="355" height="45.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Cases:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAP-hP-rmf">
+                                        <rect key="frame" x="0.0" y="67" width="355" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2S-L2-SYF" customClass="CountingLabel" customModule="Covid19App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="88.5" width="355" height="45.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Deaths:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itm-wZ-G7O">
+                                        <rect key="frame" x="0.0" y="134" width="355" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nx-VK-IM7" customClass="CountingLabel" customModule="Covid19App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="155.5" width="355" height="45.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Deaths:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3P-1B-90o">
+                                        <rect key="frame" x="0.0" y="201" width="355" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l91-Sh-ugm" customClass="CountingLabel" customModule="Covid19App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="222.5" width="355" height="45.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ECH-Eg-lrA"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ECH-Eg-lrA" firstAttribute="bottom" secondItem="8Qe-Uj-B7S" secondAttribute="bottom" constant="20" id="EsK-ZJ-ffr"/>
+                            <constraint firstItem="gHx-Bg-zAd" firstAttribute="top" secondItem="VU3-IB-rhi" secondAttribute="bottom" constant="20" id="Ip8-XE-0go"/>
+                            <constraint firstItem="VU3-IB-rhi" firstAttribute="top" secondItem="ECH-Eg-lrA" secondAttribute="top" constant="10" id="LP9-9e-zPb"/>
+                            <constraint firstItem="VU3-IB-rhi" firstAttribute="centerX" secondItem="UJm-2J-DdQ" secondAttribute="centerX" id="SrO-J8-jTo"/>
+                            <constraint firstItem="gHx-Bg-zAd" firstAttribute="leading" secondItem="UJm-2J-DdQ" secondAttribute="leading" id="ceZ-dC-wlM"/>
+                            <constraint firstItem="8Qe-Uj-B7S" firstAttribute="leading" secondItem="UJm-2J-DdQ" secondAttribute="leading" constant="10" id="fY7-pG-HSc"/>
+                            <constraint firstItem="8Qe-Uj-B7S" firstAttribute="top" secondItem="gHx-Bg-zAd" secondAttribute="bottom" constant="20" id="jRV-TV-AUz"/>
+                            <constraint firstAttribute="trailing" secondItem="gHx-Bg-zAd" secondAttribute="trailing" id="mgE-cx-L0F"/>
+                            <constraint firstAttribute="trailing" secondItem="8Qe-Uj-B7S" secondAttribute="trailing" constant="10" id="tK7-UH-6hI"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Select" image="chart.bar.doc.horizontal" catalog="system" id="itc-av-v1R"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="PickerView" destination="gHx-Bg-zAd" id="uuo-Gy-XmD"/>
+                        <outlet property="newCases" destination="X2S-L2-SYF" id="3Vm-nd-SJ5"/>
+                        <outlet property="newDeaths" destination="l91-Sh-ugm" id="CBI-dD-yc8"/>
+                        <outlet property="totalCases" destination="ql5-Qm-1vv" id="8Ra-fb-x0D"/>
+                        <outlet property="totalDeath" destination="4Nx-VK-IM7" id="ivl-wW-OLf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5zP-Rt-4g7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-658.39999999999998" y="832.53373313343332"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FTa-Bd-gBf">
@@ -127,6 +239,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="JCz-Be-CYT"/>
                         <segue destination="TVt-uU-lPO" kind="relationship" relationship="viewControllers" id="cLD-IS-DmF"/>
+                        <segue destination="WqR-rO-IMQ" kind="relationship" relationship="viewControllers" id="qZi-ye-AzI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5j-aw-BUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -224,10 +337,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="-340"/>
+            <point key="canvasLocation" x="-658" y="-694"/>
         </scene>
     </scenes>
     <resources>
+        <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
         <image name="corona" width="1920" height="1080"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="location.circle.fill" catalog="system" width="128" height="121"/>

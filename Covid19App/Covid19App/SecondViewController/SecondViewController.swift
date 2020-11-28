@@ -37,6 +37,11 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
@@ -50,10 +55,10 @@ class SecondViewController: UIViewController {
     }
     
     func animate() {
-        countryTotalCases.count(fromValue: Float(countryold), to: Float(countrytotal), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
-        countryNewCases.count(fromValue: 0, to: Float(countrynewcases), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
-        countryTotalDeaths.count(fromValue: Float(countryoldDeaths), to: Float(countrytotaldeaths), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
-        countryNewDeaths.count(fromValue: 0, to: Float(countrynewdeaths), withDuration: 10, AnimationType: .EaseOut, andCounterType: .Int)
+        countryTotalCases.count(fromValue: Float(countryold), to: Float(countrytotal), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
+        countryNewCases.count(fromValue: 0, to: Float(countrynewcases), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
+        countryTotalDeaths.count(fromValue: Float(countryoldDeaths), to: Float(countrytotaldeaths), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
+        countryNewDeaths.count(fromValue: 0, to: Float(countrynewdeaths), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
     }
     
     @objc fileprivate func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
