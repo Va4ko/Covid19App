@@ -6,25 +6,26 @@
 //
 
 import Foundation
+import UIKit
 
 var results: Results?
 var currentCountry = [Country]()
 var selectedCountry = [Country]()
 var countryNames = [String]()
 
-var old = 0
-var oldDeaths = 0
-var total = 0
-var newcases = 0
-var totaldeaths = 0
-var newdeaths = 0
+var old = Int()
+var oldDeaths = Int()
+var total = Int()
+var newcases = Int()
+var totaldeaths = Int()
+var newdeaths = Int()
 
-var countryold = 0
-var countryoldDeaths = 0
-var countrytotal = 0
-var countrynewcases = 0
-var countrytotaldeaths = 0
-var countrynewdeaths = 0
+var countryold = Int()
+var countryoldDeaths = Int()
+var countrytotal = Int()
+var countrynewcases = Int()
+var countrytotaldeaths = Int()
+var countrynewdeaths = Int()
 
 func composeURL(_ string: String) -> URL {
     let encodedText = string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -37,33 +38,6 @@ func getCountryCode() -> String {
     let locale = Locale.current
     
     return locale.regionCode!
-    
-    //    if locale.regionCode == "BG" {
-    //        return "bulgaria"
-    //    }
-    //
-    //    return "united-states"
-}
-
-func getDataFromServer(completion: @escaping ()->Void) {
-    let url = composeURL("summary")
-    let session = URLSession.shared
-    var request = URLRequest(url: url)
-    request.httpMethod = "GET"
-    request.setValue("5cf9dfd5-3449-485e-b5ae-70a60e997864", forHTTPHeaderField: "Authorization")
-    
-    let dataTask: URLSessionDataTask = session.dataTask(with: request) {
-        data, response, error in
-        
-        parse(data!)
-        updateUI()
-        
-        DispatchQueue.main.sync {
-            completion()
-        }
-    }
-    
-    dataTask.resume()
     
 }
 
@@ -84,29 +58,25 @@ func updateUI() {
     
 }
 
-func parse(_ data: Data) {
-    do {
-        let decoder = JSONDecoder()
-        results = try decoder.decode(Results.self, from: data)
-        let countryResults = results!.countries
-        
-        for country in countryResults {
-            countryNames.append(country.country)
-        }
-        
-        currentCountry = countryResults.filter { $0.countryCode == "\(getCountryCode())" }
-    } catch {
-        print(error)
-    }
-}
-
 func getcountryData(countryName: String, completion: @escaping ()->Void) -> [Country] {
     let countryResults = results!.countries
     let country = countryResults.filter { $0.country == "\(countryName)" }
-    
+
     DispatchQueue.main.async {
         completion()
     }
-    
+
     return country
 }
+
+//func currentVC() -> UIViewController {
+//    
+//    let keyWindow = UIWindow.key
+//    var currentViewCtrl: UIViewController = keyWindow!.rootViewController!
+//    while (currentViewCtrl.presentedViewController != nil) {
+//        currentViewCtrl = currentViewCtrl.presentedViewController!
+//    }
+//    
+//    return currentViewCtrl
+//    
+//}

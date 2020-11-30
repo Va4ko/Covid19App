@@ -46,12 +46,12 @@ class SecondViewController: UIViewController {
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
         
-        getDataFromServer(completion: animate)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        animate()
     }
     
     func animate() {

@@ -39,20 +39,20 @@ class ViewController: UIViewController {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
-        
         getDataFromServer(completion: animate)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        animate()
     }
     
     func animate() {        
-        totalCounts.count(fromValue: Float(old), to: Float(total), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
-        newCases.count(fromValue: 0, to: Float(newcases), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
-        totalDeaths.count(fromValue: Float(oldDeaths), to: Float(totaldeaths), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
-        newDeaths.count(fromValue: 0, to: Float(newdeaths), withDuration: 1.5, AnimationType: .EaseOut, andCounterType: .Int)
+        totalCounts.count(fromValue: Float(old), to: Float(total), withDuration: 1, AnimationType: .EaseOut, andCounterType: .Int)
+        newCases.count(fromValue: 0, to: Float(newcases), withDuration: 1, AnimationType: .EaseOut, andCounterType: .Int)
+        totalDeaths.count(fromValue: Float(oldDeaths), to: Float(totaldeaths), withDuration: 1, AnimationType: .EaseOut, andCounterType: .Int)
+        newDeaths.count(fromValue: 0, to: Float(newdeaths), withDuration: 1, AnimationType: .EaseOut, andCounterType: .Int)
     }
     
     @objc fileprivate func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
@@ -78,6 +78,71 @@ class ViewController: UIViewController {
                 tabBarController.selectedIndex -= 1
             }
         }
+    }
+    
+    func parse(_ data: Data) {
+        do {
+            let decoder = JSONDecoder()
+            results = try decoder.decode(Results.self, from: data)
+            let countryResults = results!.countries
+            
+            for country in countryResults {
+                countryNames.append(country.country)
+            }
+            
+            currentCountry = countryResults.filter { $0.countryCode == "\(getCountryCode())" }
+            
+            updateUI()
+            
+        } catch {
+            DispatchQueue.main.sync {
+                popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+            }
+        }
+    }
+    
+    func getDataFromServer(completion: @escaping ()->Void) {
+        let url = composeURL("summary")
+        let session = URLSession.shared
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("5cf9dfd5-3449-485e-b5ae-70a60e997864", forHTTPHeaderField: "Authorization")
+        
+        let dataTask: URLSessionDataTask = session.dataTask(with: request) {
+            data, response, error in
+            
+            if data != nil {
+                
+                self.parse(data!)
+                
+                DispatchQueue.main.sync {
+                    completion()
+                }
+            } else {
+                DispatchQueue.main.sync {
+                    self.popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+                }
+            }
+        }
+        dataTask.resume()
+        
+    }
+    
+    func popAlert(_ message: String) {
+        
+        let alert = UIAlertController(title: "Attention!", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Try again!", style: .default){ _ in
+            self.getDataFromServer(completion: {
+                alert.dismiss(animated: true, completion: nil)
+                self.animate()
+            })
+            
+        }
+        
+        alert.addAction(action)
+        
+        self.present(alert, animated: true)
+        
     }
     
 }
