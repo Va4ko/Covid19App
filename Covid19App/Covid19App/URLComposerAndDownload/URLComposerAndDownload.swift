@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 var results: Results?
-var currentCountry = [Country]()
-var selectedCountry = [Country]()
+var currentCountry: Country?
+var selectedCountry: Country?
 var countryNames = [String]()
 
 var old = Int()
@@ -49,23 +49,25 @@ func updateUI() {
     old = (results?.global.totalConfirmed)! - (results?.global.newConfirmed)!
     oldDeaths = (results?.global.totalDeaths)! - (results?.global.newDeaths)!
     
-    countrytotal = currentCountry[0].totalConfirmed
-    countrynewcases = currentCountry[0].newConfirmed
-    countryold = currentCountry[0].totalConfirmed - currentCountry[0].newConfirmed
-    countrytotaldeaths = currentCountry[0].totalDeaths
-    countryoldDeaths = currentCountry[0].totalDeaths - currentCountry[0].newDeaths
-    countrynewdeaths = currentCountry[0].newDeaths
+    countrytotal = currentCountry!.totalConfirmed
+    countrynewcases = currentCountry!.newConfirmed
+    countryold = currentCountry!.totalConfirmed - currentCountry!.newConfirmed
+    countrytotaldeaths = currentCountry!.totalDeaths
+    countryoldDeaths = currentCountry!.totalDeaths - currentCountry!.newDeaths
+    countrynewdeaths = currentCountry!.newDeaths
     
 }
 
-func getcountryData(countryName: String, completion: @escaping ()->Void) -> [Country] {
+func getcountryData(countryName: String, completion: @escaping ()->Void) -> Country {
+    
     let countryResults = results!.countries
-    let country = countryResults.filter { $0.country == "\(countryName)" }
-
+    let countryArray = countryResults.filter { $0.country == "\(countryName)" }
+    let country = countryArray[0]
+    
     DispatchQueue.main.async {
         completion()
     }
-
+    
     return country
 }
 

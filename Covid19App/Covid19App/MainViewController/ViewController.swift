@@ -90,14 +90,17 @@ class ViewController: UIViewController {
                 countryNames.append(country.country)
             }
             
-            currentCountry = countryResults.filter { $0.countryCode == "\(getCountryCode())" }
+            let currentCountryArray = countryResults.filter { $0.countryCode == "\(getCountryCode())" }
+            currentCountry = currentCountryArray[0]
             
-            updateUI()
+            DispatchQueue.main.async {
+                updateUI()
+            }
             
         } catch {
-            DispatchQueue.main.sync {
-                popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
-            }
+            
+            popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+            
         }
     }
     
@@ -108,41 +111,42 @@ class ViewController: UIViewController {
         request.httpMethod = "GET"
         request.setValue("5cf9dfd5-3449-485e-b5ae-70a60e997864", forHTTPHeaderField: "Authorization")
         
-        let dataTask: URLSessionDataTask = session.dataTask(with: request) {
-            data, response, error in
-            
-            if data != nil {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let dataTask: URLSessionDataTask = session.dataTask(with: request) {
+                data, response, error in
                 
-                self.parse(data!)
-                
-                DispatchQueue.main.sync {
-                    completion()
-                }
-            } else {
-                DispatchQueue.main.sync {
+                if data != nil {
+                    
+                    self.parse(data!)
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } else {
+                    
                     self.popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+                    
                 }
             }
+            dataTask.resume()
         }
-        dataTask.resume()
-        
     }
     
     func popAlert(_ message: String) {
-        
-        let alert = UIAlertController(title: "Attention!", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Try again!", style: .default){ _ in
-            self.getDataFromServer(completion: {
-                alert.dismiss(animated: true, completion: nil)
-                self.animate()
-            })
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Attention!", message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Try again!", style: .default){ _ in
+                self.getDataFromServer(completion: {
+                    alert.dismiss(animated: true, completion: nil)
+                    self.animate()
+                })
+                
+            }
             
+            alert.addAction(action)
+            
+            self.present(alert, animated: true)
         }
-        
-        alert.addAction(action)
-        
-        self.present(alert, animated: true)
-        
     }
     
 }

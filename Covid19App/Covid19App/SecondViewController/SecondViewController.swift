@@ -11,7 +11,7 @@ class SecondViewController: UIViewController {
     
     @IBOutlet weak var countryLabel: UILabel! {
         didSet{
-            countryLabel.text = currentCountry[0].country
+            countryLabel.text = currentCountry!.country
         }
     }
     @IBOutlet weak var countryTotalCases: CountingLabel! {

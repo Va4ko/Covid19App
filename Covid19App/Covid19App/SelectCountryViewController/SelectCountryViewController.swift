@@ -67,15 +67,15 @@ class SelectCountryViewController: UIViewController {
     }
     
     func updateLabels() {
-        totalCases.text = String(selectedCountry[0].totalConfirmed.formattedWithSeparator)
-        newCases.text = String(selectedCountry[0].newConfirmed.formattedWithSeparator)
-        totalDeath.text = String(selectedCountry[0].totalDeaths.formattedWithSeparator)
-        newDeaths.text = String(selectedCountry[0].newDeaths.formattedWithSeparator)
+        totalCases.text = String(selectedCountry!.totalConfirmed.formattedWithSeparator)
+        newCases.text = String(selectedCountry!.newConfirmed.formattedWithSeparator)
+        totalDeath.text = String(selectedCountry!.totalDeaths.formattedWithSeparator)
+        newDeaths.text = String(selectedCountry!.newDeaths.formattedWithSeparator)
         
-        totalCases.count(fromValue: 0, to: Float(selectedCountry[0].totalConfirmed), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
-        newCases.count(fromValue: 0, to: Float(selectedCountry[0].newConfirmed), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
-        totalDeath.count(fromValue: 0, to: Float(selectedCountry[0].totalDeaths), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
-        newDeaths.count(fromValue: 0, to: Float(selectedCountry[0].newDeaths), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
+        totalCases.count(fromValue: 0, to: Float(selectedCountry!.totalConfirmed), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
+        newCases.count(fromValue: 0, to: Float(selectedCountry!.newConfirmed), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
+        totalDeath.count(fromValue: 0, to: Float(selectedCountry!.totalDeaths), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
+        newDeaths.count(fromValue: 0, to: Float(selectedCountry!.newDeaths), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
     }
     
 }
