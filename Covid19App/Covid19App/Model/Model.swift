@@ -25,6 +25,12 @@ struct Country: Codable {
     let country, countryCode, slug: String
     let newConfirmed, totalConfirmed, newDeaths, totalDeaths: Int
     let newRecovered, totalRecovered: Int
+    var oldCases: Int {
+        totalConfirmed - newConfirmed
+    }
+    var oldDeaths: Int {
+        totalDeaths - newDeaths
+    }
     
     enum CodingKeys: String, CodingKey {
         case country = "Country"
@@ -43,6 +49,12 @@ struct Country: Codable {
 struct Global: Codable {
     let newConfirmed, totalConfirmed, newDeaths, totalDeaths: Int
     let newRecovered, totalRecovered: Int
+    var oldCases: Int {
+        totalConfirmed - newConfirmed
+    }
+    var oldDeaths: Int {
+        totalDeaths - newDeaths
+    }
     
     enum CodingKeys: String, CodingKey {
         case newConfirmed = "NewConfirmed"

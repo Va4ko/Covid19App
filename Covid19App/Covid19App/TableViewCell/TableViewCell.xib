@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="Covid19App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fj-qr-AmD" customClass="CountingLabel" customModule="Covid19App" customModuleProvider="target">
+                        <rect key="frame" x="75" y="0.0" width="245" height="40"/>
+                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
+                        <color key="textColor" systemColor="systemRedColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5r-o8-A7g">
+                        <rect key="frame" x="10" y="0.0" width="65" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="NDq-8s-xg6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="C5r-o8-A7g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="072-HI-3bO"/>
+                    <constraint firstItem="C5r-o8-A7g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="UpK-PZ-syy"/>
+                    <constraint firstItem="3Fj-qr-AmD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ydk-ya-LYJ"/>
+                    <constraint firstAttribute="trailing" secondItem="3Fj-qr-AmD" secondAttribute="trailing" id="bln-dH-H1I"/>
+                    <constraint firstAttribute="bottom" secondItem="C5r-o8-A7g" secondAttribute="bottom" id="hdL-Vk-8Nj"/>
+                    <constraint firstAttribute="bottom" secondItem="3Fj-qr-AmD" secondAttribute="bottom" id="n75-u4-pPe"/>
+                    <constraint firstItem="3Fj-qr-AmD" firstAttribute="leading" secondItem="C5r-o8-A7g" secondAttribute="trailing" id="yh2-rx-dXc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="label" destination="3Fj-qr-AmD" id="rxK-jj-KKz"/>
+                <outlet property="smallLabel" destination="C5r-o8-A7g" id="zyJ-Rz-d1s"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="126.5625"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
