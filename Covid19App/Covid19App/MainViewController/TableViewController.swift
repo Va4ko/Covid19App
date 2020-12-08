@@ -128,7 +128,7 @@ class TableViewController: UITableViewController {
                 return UITableViewCell()
             }
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
                 cell.smallLabel.text = """
                     Total
@@ -143,7 +143,7 @@ class TableViewController: UITableViewController {
                 return UITableViewCell()
             }
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
                 cell.smallLabel.text = """
                     New
@@ -158,7 +158,7 @@ class TableViewController: UITableViewController {
                 return UITableViewCell()
             }
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
                 cell.smallLabel.text = """
                     Total
@@ -173,7 +173,7 @@ class TableViewController: UITableViewController {
                 return UITableViewCell()
             }
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
                 cell.smallLabel.text = """
                     New
