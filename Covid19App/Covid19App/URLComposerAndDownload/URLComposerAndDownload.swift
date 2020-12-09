@@ -12,7 +12,7 @@ var results: Results?
 var globalData: Global?
 var currentCountry: Country?
 var selectedCountry: Country?
-var countryNames = [String]()
+var countryNames = ["---SELECT---"]
 
 func composeURL(_ string: String) -> URL {
     let encodedText = string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)

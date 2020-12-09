@@ -200,8 +200,8 @@
                                     <outlet property="delegate" destination="WqR-rO-IMQ" id="Fbo-MU-4sB"/>
                                 </connections>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VU3-IB-rhi">
-                                <rect key="frame" x="105" y="10" width="165" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VU3-IB-rhi">
+                                <rect key="frame" x="88" y="10" width="199.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6XC-os-fcw"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="tQJ-TG-eAC"/>
@@ -301,6 +301,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" systemColor="systemRedColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="fk3-nE-cfa" kind="relationship" relationship="viewControllers" id="8H3-7A-4vt"/>

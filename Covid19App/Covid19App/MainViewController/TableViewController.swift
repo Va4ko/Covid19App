@@ -120,20 +120,20 @@ class TableViewController: UITableViewController {
         if section == 0 { return 0 }
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                Total
+                cases:
+                """
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    Total
-                    cases:
-                    """
                 cell.label.text = "\(Int(globalData!.totalConfirmed).formattedWithSeparator)"
                 cell.animate(fromValue: globalData!.oldCases, toValue: globalData!.totalConfirmed, duration: 1)
             }
@@ -142,13 +142,13 @@ class TableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                New
+                cases:
+                """
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    New
-                    cases:
-                    """
                 cell.label.text = "\(Int(globalData!.newConfirmed).formattedWithSeparator)"
                 cell.animate(fromValue: 0, toValue: globalData!.newConfirmed, duration: 1)
             }
@@ -157,13 +157,13 @@ class TableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                Total
+                deaths:
+                """
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    Total
-                    deaths:
-                    """
                 cell.label.text = "\(Int(globalData!.totalDeaths).formattedWithSeparator)"
                 cell.animate(fromValue: globalData!.oldDeaths, toValue: globalData!.totalDeaths, duration: 1)
             }
@@ -172,13 +172,13 @@ class TableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                New
+                deaths:
+                """
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    New
-                    deaths:
-                    """
                 cell.label.text = "\(Int(globalData!.newDeaths).formattedWithSeparator)"
                 cell.animate(fromValue: 0, toValue: globalData!.newDeaths, duration: 1)
             }
@@ -188,6 +188,4 @@ class TableViewController: UITableViewController {
         return UITableViewCell()
     }
     
-   
-
 }

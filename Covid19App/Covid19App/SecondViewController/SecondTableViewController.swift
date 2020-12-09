@@ -107,13 +107,13 @@ class SecondTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                Total
+                cases:
+                """
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    Total
-                    cases:
-                    """
                 cell.label.text = "\(Int(currentCountry!.totalConfirmed).formattedWithSeparator)"
                 cell.animate(fromValue: currentCountry!.oldCases, toValue: currentCountry!.totalConfirmed, duration: 1.5)
             }
@@ -122,13 +122,13 @@ class SecondTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                New
+                cases:
+                """
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    New
-                    cases:
-                    """
                 cell.label.text = "\(Int(currentCountry!.newConfirmed).formattedWithSeparator)"
                 cell.animate(fromValue: 0, toValue: currentCountry!.newConfirmed, duration: 1.5)
             }
@@ -137,13 +137,13 @@ class SecondTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                Total
+                deaths:
+                """
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    Total
-                    deaths:
-                    """
                 cell.label.text = "\(Int(currentCountry!.totalDeaths).formattedWithSeparator)"
                 cell.animate(fromValue: currentCountry!.oldDeaths, toValue: currentCountry!.totalDeaths, duration: 1.5)
             }
@@ -152,13 +152,13 @@ class SecondTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCustomCell") as? TableViewCell else {
                 return UITableViewCell()
             }
+            cell.smallLabel.text = """
+                New
+                deaths:
+                """
             if globalData == nil {
-                cell.label.text = "0"
+                cell.label.text = " "
             } else {
-                cell.smallLabel.text = """
-                    New
-                    deaths:
-                    """
                 cell.label.text = "\(Int(currentCountry!.newDeaths).formattedWithSeparator)"
                 cell.animate(fromValue: 0, toValue: currentCountry!.newDeaths, duration: 1.5)
             }

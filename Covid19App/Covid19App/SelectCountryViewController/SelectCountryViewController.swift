@@ -14,22 +14,22 @@ class SelectCountryViewController: UIViewController {
     
     @IBOutlet weak var totalCases: CountingLabel! {
         didSet {
-            totalCases.text = String(0)
+            totalCases.text = String(" ")
         }
     }
     @IBOutlet weak var newCases: CountingLabel! {
         didSet {
-            newCases.text = String(0)
+            newCases.text = String(" ")
         }
     }
     @IBOutlet weak var totalDeath: CountingLabel! {
         didSet {
-            totalDeath.text = String(0)
+            totalDeath.text = String(" ")
         }
     }
     @IBOutlet weak var newDeaths: CountingLabel! {
         didSet {
-            newDeaths.text = String(0)
+            newDeaths.text = String(" ")
         }
     }
     
@@ -76,13 +76,21 @@ class SelectCountryViewController: UIViewController {
         newCases.count(fromValue: 0, to: Float(selectedCountry!.newConfirmed), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
         totalDeath.count(fromValue: 0, to: Float(selectedCountry!.totalDeaths), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
         newDeaths.count(fromValue: 0, to: Float(selectedCountry!.newDeaths), withDuration: 0.5, AnimationType: .EaseOut, andCounterType: .Int)
+        
     }
     
 }
 
 extension SelectCountryViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedCountry = getcountryData(countryName: "\(countryNames[pickerView.selectedRow(inComponent: 0)])", completion: updateLabels)
+        if pickerView.selectedRow(inComponent: 0) != 0 {
+            selectedCountry = getcountryData(countryName: "\(countryNames[pickerView.selectedRow(inComponent: 0)])", completion: updateLabels)
+        } else {
+            totalCases.text = String(" ")
+            newCases.text = String(" ")
+            totalDeath.text = String(" ")
+            newDeaths.text = String(" ")
+        }
     }
 }
 
