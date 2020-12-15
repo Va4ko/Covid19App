@@ -87,7 +87,7 @@ class SecondTableViewController: UITableViewController {
     // MARK: - Table view data source and delegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 7
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -161,6 +161,36 @@ class SecondTableViewController: UITableViewController {
             } else {
                 cell.label.text = "\(Int(currentCountry!.newDeaths).formattedWithSeparator)"
                 cell.animate(fromValue: 0, toValue: currentCountry!.newDeaths, duration: 1.5)
+            }
+            return cell
+        } else if indexPath.section == 5 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCustomCell") as? TableViewCell else {
+                return UITableViewCell()
+            }
+            cell.smallLabel.text = """
+                Total
+                recovered:
+                """
+            if globalData == nil {
+                cell.label.text = " "
+            } else {
+                cell.label.text = "\(Int(currentCountry!.totalRecovered).formattedWithSeparator)"
+                cell.animate(fromValue: currentCountry!.oldRecovered, toValue: currentCountry!.totalRecovered, duration: 1.5)
+            }
+            return cell
+        } else if indexPath.section == 6 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCustomCell") as? TableViewCell else {
+                return UITableViewCell()
+            }
+            cell.smallLabel.text = """
+                New
+                recovered:
+                """
+            if globalData == nil {
+                cell.label.text = " "
+            } else {
+                cell.label.text = "\(Int(currentCountry!.newRecovered).formattedWithSeparator)"
+                cell.animate(fromValue: 0, toValue: currentCountry!.newRecovered, duration: 1.5)
             }
             return cell
         }

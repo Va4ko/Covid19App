@@ -113,7 +113,7 @@ class TableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 7
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -181,6 +181,36 @@ class TableViewController: UITableViewController {
             } else {
                 cell.label.text = "\(Int(globalData!.newDeaths).formattedWithSeparator)"
                 cell.animate(fromValue: 0, toValue: globalData!.newDeaths, duration: 1)
+            }
+            return cell
+        } else if indexPath.section == 5 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as? TableViewCell else {
+                return UITableViewCell()
+            }
+            cell.smallLabel.text = """
+                Total
+                recovered:
+                """
+            if globalData == nil {
+                cell.label.text = " "
+            } else {
+                cell.label.text = "\(Int(globalData!.totalRecovered).formattedWithSeparator)"
+                cell.animate(fromValue: globalData!.oldRecovered, toValue: globalData!.totalRecovered, duration: 1)
+            }
+            return cell
+        } else if indexPath.section == 6 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as? TableViewCell else {
+                return UITableViewCell()
+            }
+            cell.smallLabel.text = """
+                New
+                recovered:
+                """
+            if globalData == nil {
+                cell.label.text = " "
+            } else {
+                cell.label.text = "\(Int(globalData!.newRecovered).formattedWithSeparator)"
+                cell.animate(fromValue: 0, toValue: globalData!.newRecovered, duration: 1)
             }
             return cell
         }

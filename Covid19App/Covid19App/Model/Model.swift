@@ -31,6 +31,9 @@ struct Country: Codable {
     var oldDeaths: Int {
         totalDeaths - newDeaths
     }
+    var oldRecovered: Int {
+        totalRecovered - newRecovered
+    }
     
     enum CodingKeys: String, CodingKey {
         case country = "Country"
@@ -54,6 +57,9 @@ struct Global: Codable {
     }
     var oldDeaths: Int {
         totalDeaths - newDeaths
+    }
+    var oldRecovered: Int {
+        totalRecovered - newRecovered
     }
     
     enum CodingKeys: String, CodingKey {
