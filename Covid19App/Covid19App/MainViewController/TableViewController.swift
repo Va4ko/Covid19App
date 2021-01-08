@@ -9,6 +9,8 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
+    private var arrIndexPath = [IndexPath]()
+    
     private func registerCell() {
         let cell = UINib(nibName: "TableViewCell",
                          bundle: nil)
@@ -19,6 +21,8 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loading()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
@@ -28,7 +32,7 @@ class TableViewController: UITableViewController {
         registerCell()
         
         getDataFromServer(completion: {
-            self.tableView.reloadData()
+            self.dismiss(animated: false, completion: self.tableView.reloadData)
         })
         
         tableView.sectionHeaderHeight = 30
@@ -43,6 +47,7 @@ class TableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        arrIndexPath.removeAll()
         tableView.reloadData()
     }
     
@@ -78,12 +83,32 @@ class TableViewController: UITableViewController {
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
         print("Refreshed")
+        
+        arrIndexPath.removeAll()
         getDataFromServer(completion: {
-            self.tableView.reloadData()
+            self.dismiss(animated: false, completion: self.tableView.reloadData)
+            //            self.tableView.reloadData()
         })
         
         refreshControl.endRefreshing()
     }
+    
+    func loading() {
+        DispatchQueue.main.async {
+            let viewController = currentVC()
+            let alert = UIAlertController(title: nil, message: "Getting data", preferredStyle: .alert)
+            
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.white
+            loadingIndicator.startAnimating();
+            
+            alert.view.addSubview(loadingIndicator)
+            
+            viewController.present(alert, animated: true)
+        }
+    }
+    
     
     // MARK: - Table view data source and Delegate
     
@@ -100,12 +125,29 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
+            let screenWidth = UIScreen.main.bounds.width
+            let parentView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 212))
+            parentView.backgroundColor = UIColor.clear
             
             let imageView: UIImageView = UIImageView()
+            imageView.frame = CGRect(x: 0, y: 0, width: parentView.bounds.width, height: parentView.bounds.height)
             imageView.clipsToBounds = true
             imageView.contentMode = .scaleAspectFill
             imageView.image =  UIImage(named: "corona")!
-            return imageView
+            
+            let textLabel: UILabel = UILabel()
+            textLabel.frame = CGRect(x: 0, y: 182, width: 280.0, height: 30.0)
+            textLabel.center.x = parentView.bounds.width / 2
+            textLabel.textAlignment = NSTextAlignment.center
+            textLabel.textColor = UIColor.white
+            textLabel.backgroundColor = UIColor.clear
+            textLabel.text = "Last updated: \(dateOfUpdate ?? "No info")"
+            
+            parentView.addSubview(imageView)
+            parentView.addSubview(textLabel)
+            parentView.bringSubviewToFront(textLabel)
+            
+            return parentView
         }
         
         return nil
@@ -134,8 +176,12 @@ class TableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(globalData!.totalConfirmed).formattedWithSeparator)"
-                cell.animate(fromValue: globalData!.oldCases, toValue: globalData!.totalConfirmed, duration: 1)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(globalData!.totalConfirmed).formattedWithSeparator)"
+                    cell.animate(fromValue: globalData!.oldCases, toValue: globalData!.totalConfirmed, duration: 1)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 2 {
@@ -149,8 +195,12 @@ class TableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(globalData!.newConfirmed).formattedWithSeparator)"
-                cell.animate(fromValue: 0, toValue: globalData!.newConfirmed, duration: 1)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(globalData!.newConfirmed).formattedWithSeparator)"
+                    cell.animate(fromValue: 0, toValue: globalData!.newConfirmed, duration: 1)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 3 {
@@ -164,8 +214,12 @@ class TableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(globalData!.totalDeaths).formattedWithSeparator)"
-                cell.animate(fromValue: globalData!.oldDeaths, toValue: globalData!.totalDeaths, duration: 1)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(globalData!.totalDeaths).formattedWithSeparator)"
+                    cell.animate(fromValue: globalData!.oldDeaths, toValue: globalData!.totalDeaths, duration: 1)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 4 {
@@ -179,8 +233,12 @@ class TableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(globalData!.newDeaths).formattedWithSeparator)"
-                cell.animate(fromValue: 0, toValue: globalData!.newDeaths, duration: 1)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(globalData!.newDeaths).formattedWithSeparator)"
+                    cell.animate(fromValue: 0, toValue: globalData!.newDeaths, duration: 1)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 5 {
@@ -194,8 +252,12 @@ class TableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(globalData!.totalRecovered).formattedWithSeparator)"
-                cell.animate(fromValue: globalData!.oldRecovered, toValue: globalData!.totalRecovered, duration: 1)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(globalData!.totalRecovered).formattedWithSeparator)"
+                    cell.animate(fromValue: globalData!.oldRecovered, toValue: globalData!.totalRecovered, duration: 1)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 6 {
@@ -209,8 +271,12 @@ class TableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(globalData!.newRecovered).formattedWithSeparator)"
-                cell.animate(fromValue: 0, toValue: globalData!.newRecovered, duration: 1)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(globalData!.newRecovered).formattedWithSeparator)"
+                    cell.animate(fromValue: 0, toValue: globalData!.newRecovered, duration: 1)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         }

@@ -12,11 +12,13 @@ struct Results: Codable {
     let message: String
     let global: Global
     let countries: [Country]
+    let date: String
     
     enum CodingKeys: String, CodingKey {
         case message = "Message"
         case global = "Global"
         case countries = "Countries"
+        case date = "Date"
     }
 }
 
@@ -25,6 +27,8 @@ struct Country: Codable {
     let country, countryCode, slug: String
     let newConfirmed, totalConfirmed, newDeaths, totalDeaths: Int
     let newRecovered, totalRecovered: Int
+    let date: String
+    
     var oldCases: Int {
         totalConfirmed - newConfirmed
     }
@@ -45,6 +49,7 @@ struct Country: Codable {
         case totalDeaths = "TotalDeaths"
         case newRecovered = "NewRecovered"
         case totalRecovered = "TotalRecovered"
+        case date = "Date"
     }
 }
 

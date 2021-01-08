@@ -12,7 +12,10 @@ var results: Results?
 var globalData: Global?
 var currentCountry: Country?
 var selectedCountry: Country?
-var countryNames = ["---SELECT---"]
+var countryNames: [String]?
+var dateOfUpdate: String?
+var dateOfUpdateCountry: String?
+var message: String?
 
 func composeURL(_ string: String) -> URL {
     let encodedText = string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -46,24 +49,43 @@ func parse(_ data: Data) {
     do {
         let decoder = JSONDecoder()
         results = try decoder.decode(Results.self, from: data)
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let tempLocale = dateformatter.locale // save locale temporarily
+        dateformatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let updateDate = dateformatter.date(from: results!.date)
+        dateformatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        dateformatter.locale = tempLocale // reset the locale
+        
+        dateOfUpdate = dateformatter.string(from: updateDate!)
+        
         let countryResults = results!.countries
         
+        countryNames = ["---SELECT---"]
+        
         for country in countryResults {
-            countryNames.append(country.country)
+            countryNames?.append(country.country)
         }
         
         let currentCountryArray = countryResults.filter { $0.countryCode == "\(getCountryCode())" }
         currentCountry = currentCountryArray[0]
         
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateformatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let updateDateCountry = dateformatter.date(from: currentCountry!.date)
+        dateformatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        dateformatter.locale = tempLocale // reset the locale
+        
+        dateOfUpdateCountry = dateformatter.string(from: updateDateCountry!)
+        
         globalData = Global(newConfirmed: (results?.global.newConfirmed)!, totalConfirmed: (results?.global.totalConfirmed)!, newDeaths: (results?.global.newDeaths)!, totalDeaths: (results?.global.totalDeaths)!, newRecovered: (results?.global.newRecovered)!, totalRecovered: (results?.global.totalRecovered)!)
         
-        //        DispatchQueue.main.async {
-        //            tableView.reloadData()
-        //        }
-        
     } catch {
-        
-        popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+        popAlert("\(results?.message ?? "Maybe your internet connection is failed or the server is temporarily down! Please try again later!")")
+//        popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
         
     }
 }
@@ -79,7 +101,18 @@ func getDataFromServer(completion: @escaping ()->Void) {
         let dataTask: URLSessionDataTask = session.dataTask(with: request) {
             data, response, error in
             
-            if data != nil {
+            if let error = error {
+                popAlert("Error with fetching data: \(error)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                        (200...299).contains(httpResponse.statusCode) else {
+                print("Error with the response, unexpected status code: \(String(describing: response))")
+                    return
+                  }
+            
+            if data == data {
                 
                 parse(data!)
                 
@@ -89,7 +122,8 @@ func getDataFromServer(completion: @escaping ()->Void) {
                 
             } else {
                 
-                popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+//                popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+                popAlert("\(results?.message ?? "Maybe your internet connection is failed or the server is temporarily down! Please try again later!")")
                 
             }
         }

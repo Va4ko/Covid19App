@@ -84,7 +84,7 @@ class SelectCountryViewController: UIViewController {
 extension SelectCountryViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.selectedRow(inComponent: 0) != 0 {
-            selectedCountry = getcountryData(countryName: "\(countryNames[pickerView.selectedRow(inComponent: 0)])", completion: updateLabels)
+            selectedCountry = getcountryData(countryName: "\(countryNames![pickerView.selectedRow(inComponent: 0)])", completion: updateLabels)
         } else {
             totalCases.text = String(" ")
             newCases.text = String(" ")
@@ -100,16 +100,16 @@ extension SelectCountryViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return countryNames.count
+        return countryNames!.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return countryNames[row]
+        return countryNames![row]
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        let titleData = countryNames[row]
+        let titleData = countryNames![row]
         let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.font:UIFont(name: "Arial", size: 25.0)!, NSAttributedString.Key.foregroundColor:UIColor.red])
         pickerLabel.attributedText = myTitle
         pickerLabel.textAlignment = .center

@@ -9,6 +9,8 @@ import UIKit
 
 class SecondTableViewController: UITableViewController {
     
+    private var arrIndexPath = [IndexPath]()
+    
     private func registerCell() {
         let cell = UINib(nibName: "TableViewCell",
                          bundle: nil)
@@ -46,6 +48,7 @@ class SecondTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        arrIndexPath.removeAll()
         tableView.reloadData()
     }
     
@@ -77,6 +80,8 @@ class SecondTableViewController: UITableViewController {
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
         print("Refreshed")
+        
+        arrIndexPath.removeAll()
         getDataFromServer(completion: {
             self.tableView.reloadData()
         })
@@ -114,8 +119,12 @@ class SecondTableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(currentCountry!.totalConfirmed).formattedWithSeparator)"
-                cell.animate(fromValue: currentCountry!.oldCases, toValue: currentCountry!.totalConfirmed, duration: 1.5)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(currentCountry!.totalConfirmed).formattedWithSeparator)"
+                    cell.animate(fromValue: currentCountry!.oldCases, toValue: currentCountry!.totalConfirmed, duration: 1.5)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 2 {
@@ -129,8 +138,12 @@ class SecondTableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(currentCountry!.newConfirmed).formattedWithSeparator)"
-                cell.animate(fromValue: 0, toValue: currentCountry!.newConfirmed, duration: 1.5)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(currentCountry!.newConfirmed).formattedWithSeparator)"
+                    cell.animate(fromValue: 0, toValue: currentCountry!.newConfirmed, duration: 1.5)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 3 {
@@ -144,8 +157,12 @@ class SecondTableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(currentCountry!.totalDeaths).formattedWithSeparator)"
-                cell.animate(fromValue: currentCountry!.oldDeaths, toValue: currentCountry!.totalDeaths, duration: 1.5)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(currentCountry!.totalDeaths).formattedWithSeparator)"
+                    cell.animate(fromValue: currentCountry!.oldDeaths, toValue: currentCountry!.totalDeaths, duration: 1.5)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 4 {
@@ -159,8 +176,12 @@ class SecondTableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(currentCountry!.newDeaths).formattedWithSeparator)"
-                cell.animate(fromValue: 0, toValue: currentCountry!.newDeaths, duration: 1.5)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(currentCountry!.newDeaths).formattedWithSeparator)"
+                    cell.animate(fromValue: 0, toValue: currentCountry!.newDeaths, duration: 1.5)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 5 {
@@ -174,8 +195,12 @@ class SecondTableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(currentCountry!.totalRecovered).formattedWithSeparator)"
-                cell.animate(fromValue: currentCountry!.oldRecovered, toValue: currentCountry!.totalRecovered, duration: 1.5)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(currentCountry!.totalRecovered).formattedWithSeparator)"
+                    cell.animate(fromValue: currentCountry!.oldRecovered, toValue: currentCountry!.totalRecovered, duration: 1.5)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         } else if indexPath.section == 6 {
@@ -189,8 +214,12 @@ class SecondTableViewController: UITableViewController {
             if globalData == nil {
                 cell.label.text = " "
             } else {
-                cell.label.text = "\(Int(currentCountry!.newRecovered).formattedWithSeparator)"
-                cell.animate(fromValue: 0, toValue: currentCountry!.newRecovered, duration: 1.5)
+                if arrIndexPath.contains(indexPath) == false {
+                    cell.label.text = "\(Int(currentCountry!.newRecovered).formattedWithSeparator)"
+                    cell.animate(fromValue: 0, toValue: currentCountry!.newRecovered, duration: 1.5)
+                    
+                    arrIndexPath.append(indexPath)
+                }
             }
             return cell
         }
@@ -211,12 +240,29 @@ class SecondTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
+            let screenWidth = UIScreen.main.bounds.width
+            let parentView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 212))
+            parentView.backgroundColor = UIColor.clear
             
             let imageView: UIImageView = UIImageView()
+            imageView.frame = CGRect(x: 0, y: 0, width: parentView.bounds.width, height: parentView.bounds.height)
             imageView.clipsToBounds = true
             imageView.contentMode = .scaleAspectFill
             imageView.image =  UIImage(named: "corona")!
-            return imageView
+            
+            let textLabel: UILabel = UILabel()
+            textLabel.frame = CGRect(x: 0, y: 182, width: 280.0, height: 30.0)
+            textLabel.center.x = parentView.bounds.width / 2
+            textLabel.textAlignment = NSTextAlignment.center
+            textLabel.textColor = UIColor.white
+            textLabel.backgroundColor = UIColor.clear
+            textLabel.text = "Last updated: \(dateOfUpdateCountry ?? "No info")"
+            
+            parentView.addSubview(imageView)
+            parentView.addSubview(textLabel)
+            parentView.bringSubviewToFront(textLabel)
+            
+            return parentView
         }
         
         return nil
