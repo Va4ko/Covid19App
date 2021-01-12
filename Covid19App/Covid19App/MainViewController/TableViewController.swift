@@ -52,7 +52,7 @@ class TableViewController: UITableViewController {
     }
     
     @objc func loadList(notification: NSNotification){
-        self.tableView.reloadData()
+        self.dismiss(animated: false, completion: self.tableView.reloadData)
     }
     
     @objc fileprivate func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
@@ -87,7 +87,6 @@ class TableViewController: UITableViewController {
         arrIndexPath.removeAll()
         getDataFromServer(completion: {
             self.dismiss(animated: false, completion: self.tableView.reloadData)
-            //            self.tableView.reloadData()
         })
         
         refreshControl.endRefreshing()
