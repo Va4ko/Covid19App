@@ -51,14 +51,14 @@ func parse(_ data: Data) {
         results = try decoder.decode(Results.self, from: data)
         
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let tempLocale = dateformatter.locale // save locale temporarily
         dateformatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let updateDate = dateformatter.date(from: results!.date)
         dateformatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         dateformatter.locale = tempLocale // reset the locale
-        
+
         dateOfUpdate = dateformatter.string(from: updateDate!)
         
         let countryResults = results!.countries
@@ -72,13 +72,13 @@ func parse(_ data: Data) {
         let currentCountryArray = countryResults.filter { $0.countryCode == "\(getCountryCode())" }
         currentCountry = currentCountryArray[0]
         
-        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateformatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let updateDateCountry = dateformatter.date(from: currentCountry!.date)
         dateformatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         dateformatter.locale = tempLocale // reset the locale
-        
+
         dateOfUpdateCountry = dateformatter.string(from: updateDateCountry!)
         
         globalData = Global(newConfirmed: (results?.global.newConfirmed)!, totalConfirmed: (results?.global.totalConfirmed)!, newDeaths: (results?.global.newDeaths)!, totalDeaths: (results?.global.totalDeaths)!, newRecovered: (results?.global.newRecovered)!, totalRecovered: (results?.global.totalRecovered)!)
