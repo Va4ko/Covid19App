@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class SecondTableViewController: UITableViewController {
+    
+    var secondBannerView: GADBannerView!
     
     private var arrIndexPath = [IndexPath]()
     
@@ -45,6 +48,13 @@ class SecondTableViewController: UITableViewController {
                                   for: UIControl.Event.valueChanged)
         refreshControl!.tintColor = UIColor.red
         
+        secondBannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        
+        secondBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        secondBannerView.rootViewController = self
+        secondBannerView.load(GADRequest())
+        
+        secondBannerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +97,36 @@ class SecondTableViewController: UITableViewController {
         })
         
         refreshControl.endRefreshing()
+    }
+    
+    func addViews(textForLabel: String) -> UIView {
+        let screenWidth = UIScreen.main.bounds.width
+        let parentView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 212))
+        parentView.backgroundColor = UIColor.clear
+        
+        let imageView: UIImageView = UIImageView()
+        imageView.frame = CGRect(x: 0, y: 0, width: parentView.bounds.width, height: parentView.bounds.height)
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.image =  UIImage(named: "corona")!
+        
+        let textLabel: UILabel = UILabel()
+        textLabel.frame = CGRect(x: 0, y: 182, width: 280.0, height: 30.0)
+        textLabel.center.x = parentView.bounds.width / 2
+        textLabel.textAlignment = NSTextAlignment.center
+        textLabel.textColor = UIColor.white
+        textLabel.backgroundColor = UIColor.clear
+        textLabel.text = textForLabel
+        
+        secondBannerView.center.x = parentView.bounds.width / 2
+        secondBannerView.frame.origin.y = 15
+        
+        parentView.addSubview(imageView)
+        parentView.addSubview(textLabel)
+        parentView.bringSubviewToFront(textLabel)
+        parentView.addSubview(secondBannerView)
+        
+        return parentView
     }
     
     // MARK: - Table view data source and delegate
@@ -240,33 +280,75 @@ class SecondTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-            let screenWidth = UIScreen.main.bounds.width
-            let parentView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 212))
-            parentView.backgroundColor = UIColor.clear
-            
-            let imageView: UIImageView = UIImageView()
-            imageView.frame = CGRect(x: 0, y: 0, width: parentView.bounds.width, height: parentView.bounds.height)
-            imageView.clipsToBounds = true
-            imageView.contentMode = .scaleAspectFill
-            imageView.image =  UIImage(named: "corona")!
-            
-            let textLabel: UILabel = UILabel()
-            textLabel.frame = CGRect(x: 0, y: 182, width: 280.0, height: 30.0)
-            textLabel.center.x = parentView.bounds.width / 2
-            textLabel.textAlignment = NSTextAlignment.center
-            textLabel.textColor = UIColor.white
-            textLabel.backgroundColor = UIColor.clear
-            textLabel.text = "Last updated: \(dateOfUpdateCountry ?? "No info")"
-            
-            parentView.addSubview(imageView)
-            parentView.addSubview(textLabel)
-            parentView.bringSubviewToFront(textLabel)
-            
-            return parentView
+//            let screenWidth = UIScreen.main.bounds.width
+//            let parentView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 212))
+//            parentView.backgroundColor = UIColor.clear
+//
+//            let imageView: UIImageView = UIImageView()
+//            imageView.frame = CGRect(x: 0, y: 0, width: parentView.bounds.width, height: parentView.bounds.height)
+//            imageView.clipsToBounds = true
+//            imageView.contentMode = .scaleAspectFill
+//            imageView.image =  UIImage(named: "corona")!
+//
+//            let textLabel: UILabel = UILabel()
+//            textLabel.frame = CGRect(x: 0, y: 182, width: 280.0, height: 30.0)
+//            textLabel.center.x = parentView.bounds.width / 2
+//            textLabel.textAlignment = NSTextAlignment.center
+//            textLabel.textColor = UIColor.white
+//            textLabel.backgroundColor = UIColor.clear
+//            textLabel.text = "Last updated: \(dateOfUpdateCountry ?? "No info")"
+//
+//            parentView.addSubview(imageView)
+//            parentView.addSubview(textLabel)
+//            parentView.bringSubviewToFront(textLabel)
+//
+//            return parentView
+            return addViews(textForLabel: "Last updated: \(dateOfUpdateCountry ?? "No info")")
         }
         
         return nil
         
     }
     
+}
+
+extension SecondTableViewController: GADBannerViewDelegate {
+    /// Tells the delegate an ad request loaded an ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("adViewDidReceiveAd")
+        //        addBannerViewToView(bannerView)
+        
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            bannerView.alpha = 1
+        })
+    }
+    
+    /// Tells the delegate an ad request failed.
+    func adView(_ bannerView: GADBannerView,
+                didFailToReceiveAdWithError error: GADRequestError) {
+        print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+    
+    /// Tells the delegate that a full-screen view will be presented in response
+    /// to the user clicking on an ad.
+    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+        print("adViewWillPresentScreen")
+    }
+    
+    /// Tells the delegate that the full-screen view will be dismissed.
+    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+        print("adViewWillDismissScreen")
+    }
+    
+    /// Tells the delegate that the full-screen view has been dismissed.
+    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+        print("adViewDidDismissScreen")
+    }
+    
+    /// Tells the delegate that a user click will open another app (such as
+    /// the App Store), backgrounding the current app.
+    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+        print("adViewWillLeaveApplication")
+    }
 }
