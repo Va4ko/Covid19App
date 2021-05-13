@@ -114,7 +114,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTZ-dx-ytE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-658" y="64"/>
+            <point key="canvasLocation" x="-670" y="457"/>
         </scene>
         <!--Global-->
         <scene sceneID="Dbf-gf-xe4">
@@ -228,7 +228,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y7S-ba-H3N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-658" y="-703"/>
+            <point key="canvasLocation" x="-1602" y="-721"/>
         </scene>
         <!--Select-->
         <scene sceneID="8kv-MA-xF5">
@@ -340,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zP-Rt-4g7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-658.39999999999998" y="832.53373313343332"/>
+            <point key="canvasLocation" x="-1602" y="856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FTa-Bd-gBf">
@@ -357,17 +357,55 @@
                         <segue destination="fk3-nE-cfa" kind="relationship" relationship="viewControllers" id="8H3-7A-4vt"/>
                         <segue destination="W8e-Hu-l23" kind="relationship" relationship="viewControllers" id="Isg-G5-iJY"/>
                         <segue destination="WqR-rO-IMQ" kind="relationship" relationship="viewControllers" id="qZi-ye-AzI"/>
+                        <segue destination="c5E-gQ-AiQ" kind="relationship" relationship="viewControllers" id="Utz-2r-r4d"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5j-aw-BUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1602" y="65"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="zf4-zW-weu">
+            <objects>
+                <viewController id="c5E-gQ-AiQ" customClass="WebMapViewController" customModule="Covid19App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nnc-j1-gHv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJ3-hU-jyd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lsc-7R-b9E"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OJ3-hU-jyd" secondAttribute="trailing" id="2a2-DB-WLh"/>
+                            <constraint firstItem="OJ3-hU-jyd" firstAttribute="leading" secondItem="nnc-j1-gHv" secondAttribute="leading" id="C2H-0A-dus"/>
+                            <constraint firstItem="OJ3-hU-jyd" firstAttribute="top" secondItem="lsc-7R-b9E" secondAttribute="top" id="JLI-lq-MZZ"/>
+                            <constraint firstItem="OJ3-hU-jyd" firstAttribute="bottom" secondItem="lsc-7R-b9E" secondAttribute="bottom" id="Wb4-Xv-mtB"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="nMv-sm-dga"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="OJ3-hU-jyd" id="E15-os-Pp5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ROm-FP-yFs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-671.20000000000005" y="-304.4977511244378"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="location.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="map" catalog="system" width="128" height="110"/>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

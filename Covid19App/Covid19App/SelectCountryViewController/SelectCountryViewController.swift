@@ -36,6 +36,10 @@ class SelectCountryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)

@@ -22,6 +22,7 @@
 		844EB445257E3B58002C44E4 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EB444257E3B58002C44E4 /* TableViewController.swift */; };
 		844EB44A257E4B26002C44E4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EB448257E4B25002C44E4 /* TableViewCell.swift */; };
 		844EB44B257E4B26002C44E4 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844EB449257E4B26002C44E4 /* TableViewCell.xib */; };
+		8477492D25C2C2B8003C21C0 /* WebMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477492C25C2C2B8003C21C0 /* WebMapViewController.swift */; };
 		84B507CB255EAE53009278C0 /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B507CA255EAE53009278C0 /* Formatter+Extensions.swift */; };
 		84B507CE255EAE99009278C0 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B507CD255EAE99009278C0 /* Int+Extensions.swift */; };
 		84CF620B25AF4C1000402273 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CF620A25AF4C1000402273 /* GoogleMobileAds.xcframework */; };
@@ -63,6 +64,7 @@
 		844EB444257E3B58002C44E4 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		844EB448257E4B25002C44E4 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		844EB449257E4B26002C44E4 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		8477492C25C2C2B8003C21C0 /* WebMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMapViewController.swift; sourceTree = "<group>"; };
 		84B507CA255EAE53009278C0 /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
 		84B507CD255EAE99009278C0 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		84CF620A25AF4C1000402273 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				84192A5725557EA5002C635E /* MainViewController */,
 				8415657A2563E63100A0E055 /* SecondViewController */,
 				84F099ED2570E87C00CA5E21 /* SelectCountryViewController */,
+				8477492B25C2C27F003C21C0 /* WebMapViewController */,
 				84192A5625557E85002C635E /* STORYBOARD */,
 				84192A3F25557DBF002C635E /* AppDelegate.swift */,
 				84192A4125557DBF002C635E /* SceneDelegate.swift */,
@@ -196,6 +199,14 @@
 				84348F3E256FF44E00AD7093 /* TabBarController.swift */,
 			);
 			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		8477492B25C2C27F003C21C0 /* WebMapViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8477492C25C2C2B8003C21C0 /* WebMapViewController.swift */,
+			);
+			path = WebMapViewController;
 			sourceTree = "<group>";
 		};
 		84E67409255D37000069E3CE /* URLComposerAndDownload */ = {
@@ -424,6 +435,7 @@
 				84029AD6255983C20069B5BF /* CountingLabel.swift in Sources */,
 				84192A4025557DBF002C635E /* AppDelegate.swift in Sources */,
 				84348F3F256FF44E00AD7093 /* TabBarController.swift in Sources */,
+				8477492D25C2C2B8003C21C0 /* WebMapViewController.swift in Sources */,
 				844EB445257E3B58002C44E4 /* TableViewController.swift in Sources */,
 				840979AE257FA6FE00B274E5 /* CountryLabelTableViewCell.swift in Sources */,
 				84F099F02570E8B900CA5E21 /* SelectCountryViewController.swift in Sources */,

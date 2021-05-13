@@ -54,6 +54,7 @@ class TableViewController: UITableViewController {
         bannerView.load(GADRequest())
         
         bannerView.delegate = self
+        
     }
     
     //    func addBannerViewToView(_ bannerView: GADBannerView) {

@@ -58,7 +58,7 @@ func parse(_ data: Data) {
         let updateDate = dateformatter.date(from: results!.date)
         dateformatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         dateformatter.locale = tempLocale // reset the locale
-
+        
         dateOfUpdate = dateformatter.string(from: updateDate!)
         
         let countryResults = results!.countries
@@ -78,14 +78,14 @@ func parse(_ data: Data) {
         let updateDateCountry = dateformatter.date(from: currentCountry!.date)
         dateformatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         dateformatter.locale = tempLocale // reset the locale
-
+        
         dateOfUpdateCountry = dateformatter.string(from: updateDateCountry!)
         
         globalData = Global(newConfirmed: (results?.global.newConfirmed)!, totalConfirmed: (results?.global.totalConfirmed)!, newDeaths: (results?.global.newDeaths)!, totalDeaths: (results?.global.totalDeaths)!, newRecovered: (results?.global.newRecovered)!, totalRecovered: (results?.global.totalRecovered)!)
         
     } catch {
         popAlert("\(results?.message ?? "Maybe your internet connection is failed or the server is temporarily down! Please try again later!")")
-//        popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+        //        popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
         
     }
 }
@@ -101,16 +101,18 @@ func getDataFromServer(completion: @escaping ()->Void) {
         let dataTask: URLSessionDataTask = session.dataTask(with: request) {
             data, response, error in
             
-            if let error = error {
-                popAlert("Error with fetching data: \(error)")
+            if let error = error as NSError? {
+                //                print(error.code)
+                popAlert("Error with fetching data: \(error.code)")
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse,
-                        (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(String(describing: response))")
-                    return
-                  }
+                  (200...299).contains(httpResponse.statusCode) else {
+                //                print("Error with the response, unexpected status code: \(String(describing: response))")
+                popAlert("Service Temporarily Unavailable!")
+                return
+            }
             
             if data == data {
                 
@@ -122,7 +124,7 @@ func getDataFromServer(completion: @escaping ()->Void) {
                 
             } else {
                 
-//                popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
+                //                popAlert("Maybe your internet connection is failed or the server is temporarily down! Please try again later!")
                 popAlert("\(results?.message ?? "Maybe your internet connection is failed or the server is temporarily down! Please try again later!")")
                 
             }
